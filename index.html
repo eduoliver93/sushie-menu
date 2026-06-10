@@ -50,8 +50,9 @@
             justify-content: center;
         }
         
+        /* LOGO REDUZIDA - de 250px para 180px */
         .logo-img {
-            max-width: 250px;
+            max-width: 180px;
             width: 100%;
             height: auto;
             margin: 0 auto;
@@ -290,12 +291,16 @@
             }
             .tab-btn { font-size: 0.8rem; padding: 0.6rem 1.3rem; }
             .section-title { font-size: 1.9rem; }
+            /* Ajuste da logo para telas médias */
+            .logo-img { max-width: 200px; }
         }
 
         @media (min-width: 768px) {
             .container { padding: 1.5rem 2rem 3rem; }
             .cards-grid { gap: 1.6rem; }
             .dish-img { height: 180px; }
+            /* Logo um pouco maior em desktop, mas ainda menor que antes */
+            .logo-img { max-width: 200px; }
         }
     </style>
 </head>
@@ -303,7 +308,7 @@
 <div class="container">
     <div class="hero">
         
-        <!-- SUA LOGO -->
+        <!-- SUA LOGO - AGORA COM TAMANHO REDUZIDO -->
         <div class="brand">
             <img src="images/logo-sushie.png" alt="Sushie" class="logo-img">
         </div>
