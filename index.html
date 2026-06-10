@@ -303,7 +303,7 @@
 <div class="container">
     <div class="hero">
         
-        <!-- SUA LOGO AQUI -->
+        <!-- SUA LOGO -->
         <div class="brand">
             <img src="images/logo-sushie.png" alt="Sushie" class="logo-img">
         </div>
@@ -361,23 +361,70 @@
 
     const placeholderImg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%231a3535'/%3E%3Ccircle cx='200' cy='120' r='40' fill='%23e87c2a'/%3E%3Ctext x='200' y='130' text-anchor='middle' fill='white' font-size='14'%3ESUSHIE%3C/text%3E%3C/svg%3E";
 
+    // TODAS AS IMAGENS NA PASTA "images/" (sem subpastas)
     const combos = [
-        createCard("🍱 Combo Student", "€24.50", "19 peças", "Gluten, Milk", placeholderImg),
-        createCard("🌱 Combo Vegetarian", "€27.90", "17 peças - Vegan", "Vegan", placeholderImg),
-        createCard("🔥 Combo Hot", "€27.90", "19 peças", "Gluten, Fish", placeholderImg),
-        createCard("🐟 Combo Salmon", "€35.90", "24 peças", "Fish", placeholderImg)
+        createCard("🍱 Combo Student", "€24.50", "19 peças: 8 Uramaki Philadelphia + 1 Temaki Philadelphia + 10 Hot Rolls", "Gluten, Milk", "images/combo-student.jpg"),
+        createCard("🌱 Combo Vegetarian", "€27.90", "17 peças - Vegan! Temaki Shimeji + 8 Uramaki Manga & Abacate", "Vegan", "images/combo-vegetarian.jpg"),
+        createCard("🔥 Combo Hot", "€27.90", "19 peças: 8 Uramaki Salmon Grelhado + Cream Cheese + 1 Temaki Hot", "Gluten, Fish, Milk", "images/combo-hot.jpg"),
+        createCard("🐟 Combo Salmon", "€35.90", "24 peças: 6 Sashimi Salmon + 4 Nigiri Salmon + 4 Joe Salmon", "Gluten, Fish, Milk", "images/combo-salmon.jpg"),
+        createCard("🏝️ Combo Lombok", "€37.90", "26 peças: 6 Sashimi + 8 Uramaki Philadelphia + 2 Temaki", "Gluten, Milk", "images/combo-lombok.jpg"),
+        createCard("🍀 Combo Dublin", "€44.90", "36 peças: Sashimi + Uramaki + Nigiri + Hot Rolls", "Gluten, Fish, Milk", "images/combo-dublin.jpg")
     ];
 
-    const special = [createCard("📅 Special of The Day", "€25.90", "Oferta especial", "", placeholderImg)];
-    const starters = [createCard("Ceviche Seafood", "€17.50", "Frutos do mar", "Fish", placeholderImg)];
-    const sashimi = [createCard("Salmon Sashimi", "€10.00", "6 fatias", "Fish", placeholderImg)];
-    const nigiri = [createCard("Salmon Nigiri", "€8.00", "2 peças", "Fish", placeholderImg)];
-    const gunkan = [createCard("Joe Salmon", "€10.50", "Gunkan especial", "Fish", placeholderImg)];
-    const uramaki = [createCard("Philadelphia", "€9.50", "8 peças", "Fish, Milk", placeholderImg)];
-    const hotrolls = [createCard("Hot Roll Traditional", "€9.00", "10 peças", "Gluten", placeholderImg)];
-    const temaki = [createCard("Temaki Salmon", "€9.00", "Cone", "Fish", placeholderImg)];
-    const desserts = [createCard("Hot Banana Nutella", "€10.00", "Sobremesa", "Gluten", placeholderImg)];
-    const drinks = [createCard("Coca-Cola", "€3.00", "330ml", "", placeholderImg)];
+    const special = [
+        createCard("📅 Special of The Day", "€25.90", "Oferta especial do dia - Consulte no restaurante", "", "images/special-of-the-day.jpg")
+    ];
+
+    const starters = [
+        createCard("Ceviche Seafood", "€17.50", "Mix de frutos do mar frescos com limão e coentro", "Fish", "images/ceviche-seafood.jpg"),
+        createCard("Carpaccio Salmon", "€16.50", "10 fatias de salmão com gergelim e cebolinha", "Fish", "images/carpaccio-salmon.jpg"),
+        createCard("Tempura Prawns", "€12.50", "6 camarões empanados e fritos", "Crustaceans", "images/tempura-prawns.jpg"),
+        createCard("Gyoza Dumpling", "€7.50", "6 unidades - Frango, Porco ou Vegetais", "Gluten", "images/gyoza-dumpling.jpg"),
+        createCard("Missoshiro", "€4.50", "Sopa de missô tradicional", "Soy", "images/missoshiro.jpg")
+    ];
+
+    const sashimi = [
+        createCard("Salmon Sashimi", "€10.00", "6 fatias de salmão fresco", "Fish", "images/salmon-sashimi.jpg"),
+        createCard("Tuna Sashimi", "€12.00", "6 fatias de atum fresco", "Fish", "images/tuna-sashimi.jpg")
+    ];
+
+    const nigiri = [
+        createCard("Salmon Nigiri", "€8.00", "2 peças - Salmão sobre arroz", "Fish", "images/salmon-nigiri.jpg"),
+        createCard("Prawns Nigiri", "€8.00", "2 peças - Camarão", "Crustaceans", "images/prawns-nigiri.jpg"),
+        createCard("Avocado Nigiri", "€8.00", "2 peças - Abacate (Vegan)", "Vegan", "images/avocado-nigiri.jpg")
+    ];
+
+    const gunkan = [
+        createCard("Joe Salmon", "€10.50", "Gunkan com salmão picante", "Fish", "images/joe-salmon.jpg"),
+        createCard("Joe Passion Fruit", "€10.00", "Gunkan com salmão e maracujá", "Fish", "images/joe-passion-fruit.jpg")
+    ];
+
+    const uramaki = [
+        createCard("Philadelphia", "€9.50", "8 peças - Salmão, cream cheese e pepino", "Fish, Milk", "images/uramaki-philadelphia.jpg"),
+        createCard("California", "€9.50", "8 peças - Kani, abacate, pepino e manga", "Crustaceans", "images/uramaki-california.jpg")
+    ];
+
+    const hotrolls = [
+        createCard("Hot Roll Traditional", "€9.00", "10 peças - Hot roll clássico", "Gluten", "images/hotroll-traditional.jpg"),
+        createCard("Hot Roll VIP", "€11.00", "10 peças - Hot roll especial", "Gluten", "images/hotroll-vip.jpg"),
+        createCard("Dragon Rolls", "€18.50", "Camarão inside, abacate top", "Gluten", "images/dragon-rolls.jpg")
+    ];
+
+    const temaki = [
+        createCard("Temaki Salmon Philadelphia", "€9.00", "Cone de salmão com cream cheese", "Fish, Milk", "images/temaki-salmon.jpg"),
+        createCard("Temaki Shimeji", "€7.50", "Cone de cogumelos (Vegan)", "Vegan", "images/temaki-shimeji.jpg")
+    ];
+
+    const desserts = [
+        createCard("Hot Banana Nutella", "€10.00", "Banana quente com Nutella", "Gluten", "images/dessert-banana-nutella.jpg"),
+        createCard("Mochi Ice Cream", "€6.00", "3 unidades - Morango, Matcha ou Chocolate", "Milk", "images/mochi.jpg")
+    ];
+
+    const drinks = [
+        createCard("Coca-Cola", "€3.00", "330ml", "", "images/coca-cola.jpg"),
+        createCard("Guaraná", "€3.50", "330ml - Brasileiro", "", "images/guarana.jpg"),
+        createCard("Sparkling Water", "€3.00", "Água com gás", "", "images/sparkling-water.jpg")
+    ];
 
     function render(containerId, items) {
         const container = document.getElementById(containerId);
@@ -386,7 +433,7 @@
         for (let item of items) {
             html += `
                 <div class="dish-card">
-                    <img class="dish-img" src="${item.img}" alt="${item.name}">
+                    <img class="dish-img" src="${item.img}" alt="${item.name}" onerror="this.src='${placeholderImg}'">
                     <div class="dish-info">
                         <div class="dish-header">
                             <span class="dish-name">${item.name}</span>
