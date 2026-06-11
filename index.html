@@ -255,7 +255,7 @@
         .cards-grid {
             display: flex;
             flex-direction: column;
-            gap: 1.2rem;
+            gap: 1rem;
         }
 
         .dish-card {
@@ -276,13 +276,13 @@
         }
         
         /* ================================================ */
-        /* IMAGEM - MOSTRA O TOPO (NÃO CORTA O PRATO) */
+        /* IMAGEM - MAIOR ALTURA PARA MOSTRAR MAIS */
         /* ================================================ */
         .dish-img {
             width: 100%;
-            height: 160px;
+            height: 170px;
             object-fit: cover;
-            object-position: top;
+            object-position: center;
             background: linear-gradient(145deg, #2a4a4a, #1a3535);
             display: block;
             transition: transform 0.3s ease;
@@ -292,8 +292,11 @@
             transform: scale(1.02);
         }
         
+        /* ================================================ */
+        /* ÁREA DE INFORMAÇÕES - REDUZIDA (menos preto) */
+        /* ================================================ */
         .dish-info {
-            padding: 1rem 1.1rem 1.2rem;
+            padding: 0.7rem 0.9rem 0.9rem;
         }
         
         .dish-header {
@@ -301,40 +304,40 @@
             justify-content: space-between;
             align-items: baseline;
             flex-wrap: wrap;
-            gap: 0.4rem;
-            margin-bottom: 0.5rem;
+            gap: 0.2rem;
+            margin-bottom: 0.3rem;
         }
         
         .dish-name {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
             color: #f5d5a3;
         }
         
         .dish-price {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 800;
             color: #f5a623;
             background: rgba(30,21,15,0.6);
-            padding: 0.15rem 0.7rem;
+            padding: 0.1rem 0.6rem;
             border-radius: 40px;
         }
         
         .dish-desc {
-            font-size: 0.78rem;
+            font-size: 0.7rem;
             color: #c4d6d6;
-            line-height: 1.4;
-            margin: 0.3rem 0 0.5rem;
+            line-height: 1.3;
+            margin: 0.2rem 0 0.3rem;
         }
         
         .allergen {
-            font-size: 0.62rem;
+            font-size: 0.6rem;
             color: #f0c48b;
             background: rgba(59,42,28,0.5);
             display: inline-block;
-            padding: 0.2rem 0.6rem;
+            padding: 0.15rem 0.5rem;
             border-radius: 20px;
-            margin-top: 0.25rem;
+            margin-top: 0.2rem;
         }
 
         .footer-note {
@@ -351,18 +354,18 @@
             .cards-grid {
                 display: grid;
                 grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-                gap: 1.3rem;
+                gap: 1.2rem;
             }
             .tab-btn { font-size: 0.8rem; padding: 0.6rem 1.3rem; }
             .section-title { font-size: 1.9rem; }
             .logo-img { max-width: 200px; }
-            .dish-img { height: 170px; }
+            .dish-img { height: 180px; }
         }
 
         @media (min-width: 768px) {
             .container { padding: 1.5rem 2rem 3rem; }
-            .cards-grid { gap: 1.6rem; }
-            .dish-img { height: 190px; }
+            .cards-grid { gap: 1.5rem; }
+            .dish-img { height: 200px; }
             .logo-img { max-width: 200px; }
         }
         
@@ -372,7 +375,16 @@
                 padding: 0.5rem 0.9rem;
             }
             .dish-img {
-                height: 140px;
+                height: 160px;
+            }
+            .dish-name {
+                font-size: 0.9rem;
+            }
+            .dish-price {
+                font-size: 0.9rem;
+            }
+            .dish-desc {
+                font-size: 0.65rem;
             }
         }
     </style>
