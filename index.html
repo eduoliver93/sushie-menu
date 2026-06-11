@@ -10,7 +10,7 @@
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
-            touch-action: pan-y pan-x; /* Permite apenas rolagem, não zoom */
+            touch-action: pan-y pan-x;
         }
 
         body {
@@ -21,10 +21,9 @@
             position: relative;
             min-height: 100vh;
             overflow-x: hidden;
-            touch-action: pan-y pan-x; /* Bloqueia zoom por pinça */
+            touch-action: pan-y pan-x;
         }
 
-        /* Impede zoom em todos os elementos interativos */
         button, .tab-btn, .zoom-btn, .dish-card, img {
             touch-action: manipulation;
         }
@@ -305,16 +304,17 @@
             touch-action: pan-y;
         }
         
+        /* Botão da Lupa */
         .zoom-btn {
             position: absolute;
             bottom: 10px;
             right: 10px;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.7);
             backdrop-filter: blur(4px);
             border: 1px solid rgba(232,124,42,0.5);
             border-radius: 50%;
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -327,7 +327,7 @@
         }
         
         .zoom-btn:hover {
-            background: rgba(232,124,42,0.8);
+            background: #e87c2a;
             color: #0a1a1a;
             transform: scale(1.1);
         }
@@ -336,6 +336,7 @@
             transform: scale(0.95);
         }
         
+        /* Modal de Zoom */
         .zoom-modal {
             display: none;
             position: fixed;
@@ -344,7 +345,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.95);
-            z-index: 1000;
+            z-index: 2000;
             cursor: pointer;
             align-items: center;
             justify-content: center;
@@ -360,7 +361,7 @@
             max-height: 80%;
             object-fit: contain;
             border-radius: 16px;
-            box-shadow: 0 0 30px rgba(232,124,42,0.3);
+            box-shadow: 0 0 30px rgba(232,124,42,0.4);
             touch-action: auto;
         }
         
@@ -370,7 +371,7 @@
             right: 30px;
             font-size: 2rem;
             color: #fff;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -392,6 +393,7 @@
             color: #f5a623;
             font-size: 1rem;
             text-align: center;
+            font-weight: 500;
         }
         
         .dish-card:hover .dish-img {
@@ -552,15 +554,16 @@
     </div>
 </div>
 
+<!-- Modal de Zoom da Imagem -->
 <div id="zoomModal" class="zoom-modal" onclick="closeZoom()">
-    <div class="close-zoom" onclick="closeZoom()">✕</div>
+    <div class="close-zoom" onclick="event.stopPropagation(); closeZoom()">✕</div>
     <img id="zoomImage" class="zoom-image" src="" alt="Zoom">
     <div id="zoomCaption" class="zoom-caption"></div>
 </div>
 
 <script>
     // ================================================
-    // BLOQUEIO DE ZOOM POR PINÇA (TOUCH)
+    // BLOQUEIO DE ZOOM POR PINÇA
     // ================================================
     document.addEventListener('touchmove', function(event) {
         if (event.touches.length > 1) {
@@ -568,35 +571,47 @@
         }
     }, { passive: false });
     
-    // Impede gesto de pinça no body
     document.body.addEventListener('gesturestart', function(e) {
         e.preventDefault();
     });
     
-    // Funções de zoom da imagem
-    function openZoom(imgSrc, imgAlt) {
+    // ================================================
+    // FUNÇÕES DE ZOOM DA IMAGEM (LUPA)
+    // ================================================
+    function openZoom(imgSrc, imgName) {
+        console.log("Abrindo zoom da imagem:", imgSrc);
         const modal = document.getElementById('zoomModal');
         const zoomImg = document.getElementById('zoomImage');
         const zoomCaption = document.getElementById('zoomCaption');
         
-        zoomImg.src = imgSrc;
-        zoomCaption.textContent = imgAlt;
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        if (modal && zoomImg) {
+            zoomImg.src = imgSrc;
+            zoomCaption.textContent = imgName;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        } else {
+            console.error("Erro: Modal não encontrado!");
+        }
     }
     
     function closeZoom() {
         const modal = document.getElementById('zoomModal');
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     }
     
+    // Fechar com a tecla ESC
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             closeZoom();
         }
     });
     
+    // ================================================
+    // DADOS DO MENU
+    // ================================================
     function createCard(name, price, desc, allergen, imgPath) {
         return { name, price, desc, allergen, img: imgPath };
     }
@@ -672,11 +687,13 @@
         if (!container) return;
         let html = '';
         for (let item of items) {
+            // Escapar aspas no nome para não quebrar o onclick
+            const safeName = item.name.replace(/'/g, "\\'");
             html += `
                 <div class="dish-card">
                     <div class="image-container">
                         <img class="dish-img" src="${item.img}" alt="${item.name}" onerror="this.src='${placeholderImg}'">
-                        <div class="zoom-btn" onclick="event.stopPropagation(); openZoom('${item.img}', '${item.name}')">🔍</div>
+                        <div class="zoom-btn" onclick="event.stopPropagation(); openZoom('${item.img}', '${safeName}')">🔍</div>
                     </div>
                     <div class="dish-info">
                         <div class="dish-header">
@@ -704,6 +721,9 @@
     render("desserts-grid", desserts);
     render("drinks-grid", drinks);
 
+    // ================================================
+    // SISTEMA DE ABAS
+    // ================================================
     const tabs = document.querySelectorAll('.tab-btn');
     const sections = {
         combos: document.getElementById('combos'),
