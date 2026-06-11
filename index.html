@@ -276,12 +276,13 @@
         }
         
         /* ================================================ */
-        /* IMAGEM - ALTURA REDUZIDA PARA CORTAR MENOS */
+        /* IMAGEM - MOSTRA O TOPO (NÃO CORTA O PRATO) */
         /* ================================================ */
         .dish-img {
             width: 100%;
-            height: 120px;
+            height: 160px;
             object-fit: cover;
+            object-position: top;
             background: linear-gradient(145deg, #2a4a4a, #1a3535);
             display: block;
             transition: transform 0.3s ease;
@@ -355,13 +356,13 @@
             .tab-btn { font-size: 0.8rem; padding: 0.6rem 1.3rem; }
             .section-title { font-size: 1.9rem; }
             .logo-img { max-width: 200px; }
-            .dish-img { height: 140px; }
+            .dish-img { height: 170px; }
         }
 
         @media (min-width: 768px) {
             .container { padding: 1.5rem 2rem 3rem; }
             .cards-grid { gap: 1.6rem; }
-            .dish-img { height: 160px; }
+            .dish-img { height: 190px; }
             .logo-img { max-width: 200px; }
         }
         
@@ -371,7 +372,7 @@
                 padding: 0.5rem 0.9rem;
             }
             .dish-img {
-                height: 120px;
+                height: 140px;
             }
         }
     </style>
