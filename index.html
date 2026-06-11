@@ -10,6 +10,7 @@
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
+            touch-action: pan-y pan-x; /* Permite apenas rolagem, não zoom */
         }
 
         body {
@@ -20,6 +21,12 @@
             position: relative;
             min-height: 100vh;
             overflow-x: hidden;
+            touch-action: pan-y pan-x; /* Bloqueia zoom por pinça */
+        }
+
+        /* Impede zoom em todos os elementos interativos */
+        button, .tab-btn, .zoom-btn, .dish-card, img {
+            touch-action: manipulation;
         }
 
         body::before {
@@ -213,6 +220,7 @@
             white-space: nowrap;
             scroll-snap-align: start;
             flex-shrink: 0;
+            touch-action: manipulation;
         }
         
         .tab-btn:active {
@@ -270,6 +278,7 @@
             display: flex;
             flex-direction: column;
             position: relative;
+            touch-action: pan-y;
         }
         
         .dish-card:hover {
@@ -277,13 +286,11 @@
             border-color: rgba(232,124,42,0.6);
         }
         
-        /* ================================================ */
-        /* CONTAINER DA IMAGEM COM LUPA */
-        /* ================================================ */
         .image-container {
             position: relative;
             width: 100%;
             overflow: hidden;
+            touch-action: pan-y;
         }
         
         .dish-img {
@@ -295,9 +302,9 @@
             display: block;
             transition: transform 0.3s ease;
             cursor: pointer;
+            touch-action: pan-y;
         }
         
-        /* Botão da lupa */
         .zoom-btn {
             position: absolute;
             bottom: 10px;
@@ -316,6 +323,7 @@
             z-index: 10;
             font-size: 1.2rem;
             color: #f5a623;
+            touch-action: manipulation;
         }
         
         .zoom-btn:hover {
@@ -328,7 +336,6 @@
             transform: scale(0.95);
         }
         
-        /* Modal de zoom */
         .zoom-modal {
             display: none;
             position: fixed;
@@ -354,6 +361,7 @@
             object-fit: contain;
             border-radius: 16px;
             box-shadow: 0 0 30px rgba(232,124,42,0.3);
+            touch-action: auto;
         }
         
         .close-zoom {
@@ -371,6 +379,7 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.2s;
+            touch-action: manipulation;
         }
         
         .close-zoom:hover {
@@ -543,7 +552,6 @@
     </div>
 </div>
 
-<!-- Modal de Zoom -->
 <div id="zoomModal" class="zoom-modal" onclick="closeZoom()">
     <div class="close-zoom" onclick="closeZoom()">✕</div>
     <img id="zoomImage" class="zoom-image" src="" alt="Zoom">
@@ -551,7 +559,21 @@
 </div>
 
 <script>
-    // Função para abrir o zoom
+    // ================================================
+    // BLOQUEIO DE ZOOM POR PINÇA (TOUCH)
+    // ================================================
+    document.addEventListener('touchmove', function(event) {
+        if (event.touches.length > 1) {
+            event.preventDefault();
+        }
+    }, { passive: false });
+    
+    // Impede gesto de pinça no body
+    document.body.addEventListener('gesturestart', function(e) {
+        e.preventDefault();
+    });
+    
+    // Funções de zoom da imagem
     function openZoom(imgSrc, imgAlt) {
         const modal = document.getElementById('zoomModal');
         const zoomImg = document.getElementById('zoomImage');
@@ -560,19 +582,15 @@
         zoomImg.src = imgSrc;
         zoomCaption.textContent = imgAlt;
         modal.classList.add('active');
-        
-        // Prevenir scroll do fundo
         document.body.style.overflow = 'hidden';
     }
     
-    // Função para fechar o zoom
     function closeZoom() {
         const modal = document.getElementById('zoomModal');
         modal.classList.remove('active');
         document.body.style.overflow = '';
     }
     
-    // Fechar com tecla ESC
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             closeZoom();
