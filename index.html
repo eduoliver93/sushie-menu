@@ -499,6 +499,178 @@
                 right: 8px;
             }
         }
+
+        /* ===== BOTÃO ABOUT US ===== */
+        .about-btn-wrapper {
+            text-align: center;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-btn {
+            background: linear-gradient(135deg, #e87c2a, #f5a623);
+            border: none;
+            color: #0a1a1a;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(232,124,42,0.4);
+            transition: all 0.25s ease;
+            touch-action: manipulation;
+            text-transform: uppercase;
+        }
+
+        .about-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(232,124,42,0.55);
+        }
+
+        .about-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* ===== MODAL ABOUT US ===== */
+        .about-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.92);
+            backdrop-filter: blur(8px);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            padding: 1.2rem;
+            overflow-y: auto;
+        }
+
+        .about-modal.active {
+            display: flex;
+        }
+
+        .about-content {
+            background: linear-gradient(145deg, #122626, #0d1f1f);
+            border: 1px solid rgba(232,124,42,0.4);
+            border-radius: 24px;
+            max-width: 620px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 2rem 1.6rem;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            animation: fadeSlideUp 0.35s ease-out;
+        }
+
+        .about-close {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(232,124,42,0.4);
+            color: #f5a623;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            touch-action: manipulation;
+            z-index: 2;
+        }
+
+        .about-close:hover {
+            background: #e87c2a;
+            color: #0a1a1a;
+            transform: scale(1.08);
+        }
+
+        .about-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #e8f0f0, #f5a623);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            border-left: 5px solid #e87c2a;
+            padding-left: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-subtitle {
+            font-size: 0.85rem;
+            color: #f5a623;
+            font-weight: 500;
+            margin-bottom: 1.3rem;
+            padding-left: 1.1rem;
+            font-style: italic;
+        }
+
+        .about-text p {
+            font-size: 0.82rem;
+            line-height: 1.65;
+            color: #d4e6e6;
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .about-text strong {
+            color: #f5a623;
+        }
+
+        .about-section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #f5a623;
+            margin-top: 1.4rem;
+            margin-bottom: 0.7rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid rgba(232,124,42,0.3);
+        }
+
+        .about-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1rem 0;
+        }
+
+        .about-list li {
+            font-size: 0.8rem;
+            line-height: 1.55;
+            color: #d4e6e6;
+            padding: 0.35rem 0 0.35rem 1.4rem;
+            position: relative;
+        }
+
+        .about-list li::before {
+            content: '🍣';
+            position: absolute;
+            left: 0;
+            top: 0.35rem;
+            font-size: 0.75rem;
+        }
+
+        .about-closing {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(232,124,42,0.1);
+            border-left: 4px solid #e87c2a;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #f5d5a3;
+            text-align: center;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -548,9 +720,56 @@
     <div id="desserts" class="menu-section"><h2 class="section-title">🍰 DESSERTS</h2><div class="cards-grid" id="desserts-grid"></div></div>
     <div id="drinks" class="menu-section"><h2 class="section-title">🥤 DRINKS</h2><div class="cards-grid" id="drinks-grid"></div></div>
 
+    <!-- Botão About Us -->
+    <div class="about-btn-wrapper">
+        <button class="about-btn" onclick="openAbout()">🍣 About Us</button>
+    </div>
+
     <div class="footer-note">
         <span>🍣 Sushie - 13 Crown Alley, Temple Bar, Dublin 2</span><br>
         <span>📋 Allergens: G(Gluten) | Cr(Crustaceans) | F(Fish) | M(Milk)</span>
+    </div>
+</div>
+
+<!-- Modal About Us -->
+<div id="aboutModal" class="about-modal" onclick="closeAbout()">
+    <div class="about-content" onclick="event.stopPropagation()">
+        <div class="about-close" onclick="closeAbout()">✕</div>
+        <h2 class="about-title">About Us</h2>
+        <p class="about-subtitle">Bringing the Art of Japanese Cuisine to the Heart of Dublin</p>
+        <div class="about-text">
+            <p>Founded with a simple yet passionate mission, <strong>Sushie</strong> was created to bring the authentic flavors, precision, and artistry of Japanese cuisine to the vibrant streets of Dublin. Located on Crown Alley in the heart of Temple Bar, the restaurant has become a welcoming destination for both local residents and food lovers eager to experience true culinary craftsmanship.</p>
+
+            <p>Positioned on the second floor, <strong>Sushie</strong> combines traditional techniques, the freshest ingredients, and warm hospitality to create a genuine dining experience. Every dish is crafted with care by senior chefs boasting over 15 years of experience, celebrating the flavors and dedication that make Japanese food so special.</p>
+
+            <p>Over time, <strong>Sushie</strong> has earned a reputation for exceptional quality, masterful knife work, and a commitment to customer satisfaction. Signature creations such as fresh salmon selections, delicate sashimis, and exclusive rolls—like our renowned Sushie Rolls and Dragon Rolls—have made the restaurant a favorite among sushi enthusiasts and newcomers alike.</p>
+
+            <p>More than just a restaurant, <strong>Sushie</strong> is a space where people come together to enjoy incredible food, appreciate culinary culture, and create memorable moments with family and friends.</p>
+
+            <h3 class="about-section-title">🎯 Our Mission</h3>
+            <p>To deliver the authentic taste and artistry of Japan through high-quality ingredients, expert craftsmanship, and a welcoming atmosphere that makes every guest feel at home.</p>
+
+            <h3 class="about-section-title">👁️ Our Vision</h3>
+            <p>To be recognized as Dublin's leading Japanese dining destination, connecting people through outstanding food, culture, and hospitality.</p>
+
+            <h3 class="about-section-title">💎 Our Values</h3>
+            <ul class="about-list">
+                <li>Authentic Japanese flavors and modern creativity</li>
+                <li>Uncompromising quality in every dish</li>
+                <li>Warm and attentive service</li>
+                <li>Passion for culinary excellence</li>
+                <li>Respect for culinary tradition</li>
+                <li>Commitment to customer satisfaction</li>
+                <li>Community and cultural connection</li>
+            </ul>
+
+            <h3 class="about-section-title">🏠 A Taste of Japan</h3>
+            <p>Whether you're looking for an exquisite sit-down dinner, a casual gathering with friends, or the best Japanese food delivered straight to your door, <strong>Sushie</strong> is proud to bring an exceptional slice of Japan to Temple Bar.</p>
+
+            <div class="about-closing">
+                Welcome to Sushie — where every meal is crafted with passion, tradition, and care. 🍣
+            </div>
+        </div>
     </div>
 </div>
 
@@ -750,6 +969,32 @@
 
     tabs.forEach(btn => {
         btn.addEventListener('click', () => activateTab(btn.getAttribute('data-tab')));
+    });
+
+    // ================================================
+    // ABOUT US - ABRIR / FECHAR MODAL
+    // ================================================
+    function openAbout() {
+        const modal = document.getElementById('aboutModal');
+        if (modal) {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closeAbout() {
+        const modal = document.getElementById('aboutModal');
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+
+    // Fechar com a tecla ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeAbout();
+        }
     });
 </script>
 </body>
