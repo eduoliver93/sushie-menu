@@ -671,6 +671,71 @@
             text-align: center;
             font-weight: 500;
         }
+
+        /* ===== RODAPÉ EOTECH ===== */
+        .eotech-footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(232,124,42,0.15);
+            flex-wrap: wrap;
+        }
+
+        .eotech-logo {
+            height: 42px;
+            width: auto;
+            display: block;
+            opacity: 0.95;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .eotech-logo:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .eotech-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.35;
+            text-align: left;
+        }
+
+        .eotech-text .developed {
+            font-size: 0.75rem;
+            color: #8aa8a8;
+            letter-spacing: 0.5px;
+        }
+
+        .eotech-text .developed strong {
+            color: #f5a623;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .eotech-text .slogan {
+            font-size: 0.7rem;
+            color: #f5a623;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+        }
+
+        @media (max-width: 480px) {
+            .eotech-footer {
+                flex-direction: column;
+                gap: 0.6rem;
+                text-align: center;
+            }
+            .eotech-text {
+                text-align: center;
+            }
+            .eotech-logo {
+                height: 36px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -728,6 +793,15 @@
     <div class="footer-note">
         <span>🍣 Sushie - 13 Crown Alley, Temple Bar, Dublin 2</span><br>
         <span>📋 Allergens: G(Gluten) | Cr(Crustaceans) | F(Fish) | M(Milk)</span>
+    </div>
+
+    <!-- Rodapé EOTECH -->
+    <div class="eotech-footer">
+        <img src="images/logo-eotech.png" alt="EOTECH" class="eotech-logo">
+        <div class="eotech-text">
+            <span class="developed">Developed by <strong>EOTECH</strong></span>
+            <span class="slogan">EXPERIENCE. DESIGN. CODE</span>
+        </div>
     </div>
 </div>
 
